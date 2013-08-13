@@ -1,0 +1,22 @@
+#ui-datepicker-div {
+	width: 320px !important;
+	display: block !important;
+	top: 150px !important;
+}
+
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all, .ui-datepicker-calendar {
+	display: block !important;
+}
+
+label#link_1 {
+	width: 320px;
+	height: 40px;
+	background-color: red;
+	display: block;
+	cursor: pointer;
+}
+
+.date {
+	border: none;
+	color: green;
+}
