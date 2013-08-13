@@ -2,12 +2,14 @@
  * CALENDAR *
 ***************/
 
-  $(function() {
+$(function() {
     $( "#from" ).datepicker({
       defaultDate: "+1w",
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
+      	console.log(BEGIN);
+      	console.log(selectedDate);
         $( "#to" ).datepicker( "option", "minDate", selectedDate );
       }
     });
@@ -16,14 +18,16 @@
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
+      	console.log(END);
+      	console.log(selectedDate);
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
     });
-  });
+});
 
-/****************
- * READ CALENDAR *
-***************/
+/**********************
+ * READ CALENDAR DATE *
+**********************/
 
 $(document).ready(function() {
 	/*
@@ -43,8 +47,7 @@ $(document).ready(function() {
 			console.log (url);
 
 			$("#url").html(url);
-
-	});
+});
 	
 	$("#link_1").click(function() {
 		var v_url = "";
