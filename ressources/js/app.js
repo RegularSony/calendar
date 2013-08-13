@@ -8,7 +8,7 @@ $(function() {
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-      	console.log('BEGIN');
+      	console.log(BEGIN);
       	console.log(selectedDate);
         $( "#to" ).datepicker( "option", "minDate", selectedDate );
       }
@@ -18,7 +18,7 @@ $(function() {
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-      	console.log('END');
+      	console.log(END);
       	console.log(selectedDate);
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 			$("#url").html(url);
 });
-
+	
 	$("#link_1").click(function() {
 		var v_url = "";
 		v_url += "http://activity-rec.herokuapp.com/api/marty/v0/get_timeline?start_date=";
