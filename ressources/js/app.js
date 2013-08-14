@@ -2,15 +2,40 @@
  * CALENDAR *
 ***************/
 
+
 $(function() {
+	var from_selected = false;
+	var to_selected = false;
+	
+	function run_when_ready(){
+		if (from_selected && to_selected)
+			alert("Running WhenReady from "+ from_selected +" to " + to_selected);
+	}
+	
+	function select_date(type,dateValue){
+		if (dateValue == "")
+			return false;
+		
+		switch(type){
+			case "to":
+				$( "#from" ).datepicker( "option", "maxDate", dateValue );
+			break;
+			case "from":
+				$( "#to" ).datepicker( "option", "minDate", dateValue );
+			break;
+		}
+		
+		return dateValue;
+	}
+	
     $( "#from" ).datepicker({
       defaultDate: "+1w",
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-      	console.log(BEGIN);
-      	console.log(selectedDate);
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      	from_selected = select_date("from",selectedDate)
+		run_when_ready()
+       
       }
     });
     $( "#to" ).datepicker({
@@ -18,9 +43,9 @@ $(function() {
       changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-      	console.log(END);
-      	console.log(selectedDate);
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      	to_selected = select_date("to",selectedDate)
+		run_when_ready()
+
       }
     });
 });
