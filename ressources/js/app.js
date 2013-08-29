@@ -1,18 +1,89 @@
+/*********
+ * DATA *
+*********/
+var data = function () {
+			
+	console.log('success');
+
+	var truc = $.ajax({
+
+  		//HERE I DON T KNOW HOW I CAN PUT V_URL
+  		url : v_url,
+  		
+		type: "GET",
+       	dataType: "json",
+
+        success: function(dataFromServer) {
+        	var v_mydata = "";
+        	var v_mydataTime = "";
+
+				/**************************
+				* AFFICHE LES ACTIVITEES *
+				*************************/
+			
+				for (var j = 0; j < dataFromServer['timleine'].length; j++) {
+
+					if ( (dataFromServer['timleine'][j]['name']) != undefined ) {
+						
+						v_mydata += "Nom : "
+						v_mydata += dataFromServer['timleine'][j]['name']+ "<br />";
+						
+						v_mydata += "Durée max : "
+						v_mydata += dataFromServer['timleine'][j]['duration_max']+ "<br />";
+
+						v_mydata += "Durée mini : "
+						v_mydata += dataFromServer['timleine'][j]['duration_min']+ "<br />";
+						
+						v_mydata += "Place : "
+						v_mydata += dataFromServer['timleine'][j]['where'][0]['place']+ "<br />";
+						v_mydata += "Adresse : "
+						v_mydata += dataFromServer['timleine'][j]['where'][0]['address']+ "<br />";
+						v_mydata += "Code Postale : "
+						v_mydata += dataFromServer['timleine'][j]['where'][0]['zipcode']+ " ";
+						v_mydata += dataFromServer['timleine'][j]['where'][0]['city']+ "<br />";
+						
+						v_mydata += "Latitude : "
+						v_mydata += dataFromServer['timleine'][j]['where'][0]['latitude']+ "<br />";
+						v_mydata += "Longitude : "
+						v_mydata += dataFromServer['timleine'][j]['where'][0]['longitude']+ "<br />";
+						
+						v_mydata += "<br/>------------------------------------------------------<br/><br/>";
+						
+					}
+
+				}
+				
+			$("#col_left").html(v_mydataTime);
+			
+			// Affiche toutes les données
+			$("#col_right").html(v_mydata);
+			
+        }
+    });
+    
+};
+
 /*************
  * CALENDAR *
-***************/
-
+*************/
 
 $(function() {
 	var from_selected = false;
 	var to_selected = false;
 	
-	function run_when_ready(){
-		if (from_selected && to_selected)
-			alert("Running WhenReady from "+ from_selected +" to " + to_selected);
+	function run_when_ready() {
+		if (from_selected && to_selected) {
+
+			var v_url = "";
+				v_url += "http://activity-rec.herokuapp.com/api/marty/v0/get_timeline?start_date=";
+				v_url += from_selected;
+				v_url += "&end_date=";
+				v_url += to_selected;
+		}
+		console.log(v_url);
 	}
 	
-	function select_date(type,dateValue){
+	function select_date(type,dateValue) {
 		if (dateValue == "")
 			return false;
 		
@@ -49,38 +120,3 @@ $(function() {
       }
     });
 });
-
-/**********************
- * READ CALENDAR DATE *
-**********************/
-
-$(document).ready(function() {
-	/*
-		$(".zone_critere").click(function(e) {
-	  		
-			//console.log(id_final[1]);
-				$("#bloc_critere_1").css('height','262');
-
-		}
-	*/
-		console.log ('ready');
-		var url = "";
-			url += "http://activity-rec.herokuapp.com/api/marty/v0/get_timeline?start_date=";
-			url += $("#from");
-			url += "&end_date=";
-			url += $("#to");
-			console.log (url);
-
-			$("#url").html(url);
-});
-	
-	$("#link_1").click(function() {
-		var v_url = "";
-		v_url += "http://activity-rec.herokuapp.com/api/marty/v0/get_timeline?start_date=";
-		v_url += $("#from");
-		v_url += "&end_date=";
-		v_url += $("#to");
-		console.log (v_url);
-		
-		$("#ajax_url").html(url);
-	});
